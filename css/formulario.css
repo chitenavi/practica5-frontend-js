@@ -1,0 +1,88 @@
+/* Formularios */
+.formulario {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  background-color: var(--surface2-color);
+  padding: 1rem 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 1rem;
+  max-width: 800px;
+  min-width: 400px;
+}
+
+.form-field {
+  margin: 1rem 0.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .form-field.medium {
+    width: 62%;
+  }
+
+  .form-field.short {
+    width: 30%;
+  }
+}
+
+.form-field .field-data {
+  font-size: 1.1rem;
+}
+.formulario h2 {
+  text-transform: uppercase;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='tel'],
+textarea,
+select {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  /* border: 1px solid lightgray; */
+  background-color: var(--surface1-color);
+  color: var(--element3-color);
+  width: 100%;
+}
+.form-field .label-title {
+  font-size: 1.4rem;
+}
+
+/* Errores */
+.error {
+  font-size: 0.9rem;
+  color: var(--error-color);
+}
+.border-focus {
+  border: 2px solid var(--secondary-color);
+}
+.border-error {
+  border: 1px solid darkred;
+}
+.border-success {
+  border: 1px solid mediumspringgreen;
+}
+.form-field.validate {
+  padding: 0.2rem 0;
+  border-radius: 0.5rem;
+}
+
+.validate.error-div {
+  border: 1px solid var(--error-color);
+  background-color: rgb(238, 148, 166);
+  color: var(--error-color);
+}
+.validate.success-div {
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: mediumspringgreen;
+}
+
+/* Formulario Login*/
+.f-login {
+  max-width: 400px;
+}

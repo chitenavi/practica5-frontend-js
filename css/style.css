@@ -1,0 +1,193 @@
+:root {
+  /* Colors */
+  --surface1-color: #e6e6e6;
+  --surface2-color: #f2f2f2;
+  --surface3-color: #ffffff;
+  --element1-color: #111111;
+  --element2-color: #222222;
+  --element3-color: #333333;
+  --primary-color: #01408e;
+  --secondary-color: #3c5d5c;
+  --tertiary-color: #fff7d6;
+  --footer-bg-color: #000;
+  --error-color: rgb(163, 0, 33);
+
+  /* Shadows */
+  --box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.35);
+
+  /* Fonts */
+  --sans: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu,
+    cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  --max-width: 1200px;
+  --menu-height: 80px;
+}
+
+html {
+  font-family: var(--sans);
+  font-size: 1rem;
+  max-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--surface3-color);
+  min-height: 100vh;
+}
+
+main {
+  max-width: var(--max-width);
+  flex: 1;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--element2-color);
+}
+
+h2 {
+  color: var(--element3-color);
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+/* Botones, enlaces */
+button {
+  margin: 0.5rem 0;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 1rem;
+  text-transform: uppercase;
+
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  color: var(--tertiary-color);
+  transition: filter 0.3s ease-in-out;
+}
+a {
+  color: var(--secondary-color);
+  transition: filter 0.3s ease-in-out;
+}
+button:hover,
+a:hover {
+  filter: brightness(120%) saturate(120%);
+  cursor: pointer;
+}
+
+/* Utils */
+.nodisplay {
+  display: none !important;
+}
+.oculto {
+  visibility: hidden;
+}
+
+/* Header, Navbar */
+.menu {
+  box-shadow: var(--box-shadow);
+  background-color: var(--surface2-color);
+  height: var(--menu-height);
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.3rem;
+}
+
+.menu ul {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.menu a {
+  display: block;
+  line-height: var(--menu-height);
+  padding: 0 1rem;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+}
+
+.menu a:hover {
+  background-color: var(--secondary-color);
+  color: var(--tertiary-color);
+}
+
+/* Página contenido pelis */
+.films-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.films-container .card-film {
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.films-container .card-film:hover {
+  transform: scale(1.05);
+  filter: none;
+}
+.card-film img {
+  width: 100%;
+}
+.card-film .info-film {
+  background-color: var(--surface2-color);
+}
+.info-film span {
+  font-weight: bold;
+}
+.menu-nav-films {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Página detalle pelicula */
+.detail-container {
+  background-color: var(--surface2-color);
+  padding: 1rem 2rem;
+  box-shadow: var(--box-shadow);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+}
+
+.film-info h3 {
+  margin: 0;
+}
+.film-info p {
+  margin-bottom: 1rem;
+}
+.film-info span {
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: var(--footer-bg-color);
+  color: #ddd;
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  width: 100vw;
+}
