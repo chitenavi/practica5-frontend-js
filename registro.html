@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/formulario.css" />
+
+    <script type="module" src="./js/app.js"></script>
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <form action="" class="formulario" id="form-register" novalidate>
+        <h2 class="form-field">Registro</h2>
+        <div class="form-field">
+          <ul>
+            <li>Los campos marcados con asterisco (*) son obligatorios</li>
+            <li>
+              Debes introducir tu API-key de
+              <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-field">
+          <div class="field-data">
+            <label class="label-title" for="">Género:</label>
+            <input
+              class="i-single-val"
+              type="radio"
+              name="genero"
+              id="i-male"
+              value="male"
+              required
+            />
+            <label for="i-male">Hombre</label>
+            <input
+              class="i-single-val"
+              type="radio"
+              name="genero"
+              id="i-female"
+              value="female"
+            />
+            <label for="i-female">Mujer</label>
+            <input
+              class="i-single-val"
+              type="radio"
+              name="genero"
+              id="i-other"
+              value="other"
+            />
+            <label for="i-other">Otro</label>
+            <label for="">(*)</label>
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="text"
+              id="i-name"
+              placeholder="Nombre*"
+              required
+              minlength="3"
+              maxlength="15"
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error"></p>
+          </div>
+        </div>
+
+        <div class="form-field medium">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="text"
+              id="i-surname"
+              placeholder="Apellidos*"
+              minlength="5"
+              maxlength="40"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <select
+              class="i-single-val"
+              name=""
+              id="s-nation"
+              required
+            ></select>
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <select
+              class="i-single-val"
+              name=""
+              id="s-prov"
+              required
+              disabled
+            ></select>
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="tel"
+              id="i-telf"
+              placeholder="Número de teléfono*"
+              minlength="9"
+              maxlength="14"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="text"
+              id="i-username"
+              placeholder="Nombre de usuario*"
+              minlength="3"
+              maxlength="15"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field medium">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="email"
+              id="i-email"
+              placeholder="Email*"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="password"
+              id="i-password"
+              placeholder="Password*"
+              minlength="6"
+              maxlength="15"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field short">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="password"
+              id="i-passconf"
+              placeholder="Confirma password*"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field medium">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="text"
+              id="i-apikey"
+              placeholder="API-key*"
+              minlength="10"
+              maxlength="40"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field medium">
+          <div class="field-data">
+            <textarea
+              id="i-comment"
+              rows="5"
+              placeholder="Comentarios..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="checkbox"
+              id="i-condition"
+              required
+            />
+            <label for="i-condition">Acepto las condiciones de uso</label>
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error">Error validacion</p>
+          </div>
+        </div>
+
+        <div class="form-field validate nodisplay"></div>
+
+        <div class="form-field">
+          <button type="submit" class="button" id="btn-register">
+            Registrar
+          </button>
+        </div>
+
+        <div class="form-field">
+          <p>Ya tienes cuenta? <a href="./login.html">Haz login</a></p>
+        </div>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
