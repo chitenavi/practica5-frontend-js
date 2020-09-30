@@ -14,6 +14,7 @@
     "prettier/prettier": "error",
     "spaced-comment": "off",
     "no-console": "off",
+    "import/extensions": ["error", "always", { "ignorePackages": true }],
     "consistent-return": "off",
     "prefer-arrow-callback": "error",
     "func-names": "off",
