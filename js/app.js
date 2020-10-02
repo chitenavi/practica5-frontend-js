@@ -20,6 +20,11 @@ const userLogged = sessionStorage.getItem('userLogged')
   : null;
 const isLogged = !!userLogged;
 
+// Configuracion del API
+const apiConfig = sessionStorage.getItem('apiConfig')
+  ? JSON.parse(sessionStorage.getItem('apiConfig'))
+  : null;
+
 function main() {
   // Renderizamos la página
   renderPage(pageActual, isLogged);
@@ -90,6 +95,15 @@ function main() {
     });
 
     logForm.querySelector('#btn-login').addEventListener('click', onClickLogin);
+  }
+
+  // Si el usuario da click en Logout, borramos los datos
+  // de sesion y redirigimos a index
+  if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+      sessionStorage.clear();
+      window.location = `index.html`;
+    });
   }
 
   //--- Funciones Manejadoras ----
@@ -221,6 +235,17 @@ function main() {
       }, 1000);
     }
   }
+}
+
+// Obtener la config del API con el API key y la guardamos
+// como variable de sesion
+async function getAPIConfig(apikey) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/configuration?api_key=${apikey}`
+  );
+  const configApi = await response.json();
+
+  sessionStorage.setItem('apiConfig', JSON.stringify(configApi));
 }
 
 document.addEventListener('DOMContentLoaded', main);
