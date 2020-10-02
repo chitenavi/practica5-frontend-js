@@ -80,6 +80,7 @@ export const templHeader = {
 
 export const templFooter = {
   render: () => {
-    return `<p>Todos los derechos reservados. InfoPelis</p>`;
+    const year = new Date().getFullYear();
+    return `<p>Todos los derechos reservados. InfoPelis ${year}</p>`;
   },
 };
