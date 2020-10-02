@@ -26,15 +26,17 @@
 html {
   font-family: var(--sans);
   font-size: 1rem;
-  max-height: 100vh;
   overflow-x: hidden;
+  background-image: url('../img/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--surface3-color);
+
   min-height: 100vh;
 }
 
