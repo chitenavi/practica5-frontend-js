@@ -1,4 +1,4 @@
-import { templTitle, templHeader, templFooter } from './templates/templates.js';
+import { renderPage, setSelect } from './utils/tools.js';
 
 // Página actual
 const pos = window.location.pathname.lastIndexOf('/') + 1;
@@ -9,17 +9,6 @@ const userLogged = sessionStorage.getItem('userLogged')
   ? JSON.parse(sessionStorage.getItem('userLogged'))
   : null;
 const isLogged = !!userLogged;
-
-function renderPage(page, logged) {
-  // Render titulo de la pagina
-  document.querySelector('title').innerText = templTitle.render(page);
-
-  // Render header
-  document.querySelector('header').innerHTML = templHeader.render(page, logged);
-
-  // Render footer
-  document.querySelector('footer').innerHTML = templFooter.render();
-}
 
 function main() {
   // Renderizamos la página
