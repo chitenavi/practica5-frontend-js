@@ -33,12 +33,13 @@ function main() {
   // Renderizamos la página
   renderPage(pageActual, isLogged);
 
-  // Lógica de usuario logueado, si no está se redirige a index,
-  // en caso contrario, cargamos la página correspondiente
-  if (userLogged && pageActual === 'main.html') {
+  // Lógica de usuario logueado, si no está se no permitimos
+  // entrar al contenido y redirigimos a index. Si está,
+  // cargamos el contenido según la página
+  if (isLogged && pageActual === 'main.html') {
     showContentFilms(pagination);
-  } else if (userLogged && pageActual === 'detail.html') {
-    //showDetailFilm();
+  } else if (isLogged && pageActual === 'detail.html') {
+    showDetailFilm();
   }
 
   //-- Nodos de DOM --
@@ -328,6 +329,44 @@ async function showContentFilms(pag) {
 
   document.querySelector('div.films').classList.remove('nodisplay');
   document.querySelector('div.films-container').innerHTML = html;
+}
+
+// Muestra los detalles de una película en una página independiente
+async function showDetailFilm() {
+  // Obtenemos los parametros de la query string
+  const params = new URLSearchParams(window.location.search);
+
+  let url = 'https://api.themoviedb.org/3/movie';
+  url += `/${params.get('id')}`;
+  url += `?api_key=${userLogged.apikey}`;
+  url += `&language=es-ES`;
+
+  const response = await fetch(url);
+  const dataFilm = await response.json();
+
+  console.log(dataFilm);
+
+  const html = `
+  <h2>${dataFilm.title}</h2>
+  <div>
+  <img src="${apiConfig.images.secure_base_url}w780${dataFilm.backdrop_path}" alt="" />
+  </div>
+  
+  <div class="film-info">
+    <h3>Genero</h3>
+    <p>${dataFilm.genres[0].name}</p>
+    <h3>Sinopsis</h3>
+    <p>
+      ${dataFilm.overview}
+    </p>
+    <p>
+      <span>Fecha de lanzamiento:</span> ${dataFilm.release_date}
+      <span>Puntuación media:</span> ${dataFilm.vote_average}
+    </p>
+  </div>
+  `;
+  document.querySelector('div.detail-container').innerHTML = html;
+  document.querySelector('div.detail-container').classList.remove('nodisplay');
 }
 
 // Obtener la config del API con el API key y la guardamos
