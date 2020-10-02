@@ -8,8 +8,8 @@ export const templTitle = {
       case 'registro.html':
         titulo = 'Registro';
         break;
-      case 'usuario.html':
-        titulo = 'Usuario';
+      case 'main.html':
+        titulo = 'Main';
         break;
       default:
         titulo = 'Inicio';
@@ -36,7 +36,7 @@ export const templHeader = {
           <li><a href="./login.html">Login</a></li>
         `;
         break;
-      case 'usuario.html':
+      case 'main.html':
         titulo = 'Peliculas más populares';
         menu = `
           <li><a id="btn-logout" href="./index.html">Logout</a></li>
@@ -45,7 +45,7 @@ export const templHeader = {
       case 'detail.html':
         titulo = 'Info de la Película';
         menu = `
-            <li><a href="./usuario.html">Peliculas</a></li>
+            <li><a href="./main.html">Peliculas</a></li>
             <li><a id="btn-logout" href="./index.html">Logout</a></li>
           `;
         break;
@@ -53,7 +53,7 @@ export const templHeader = {
         titulo = 'Bienvenido a InfoPelis';
         if (logged) {
           menu = `
-          <li><a href="./usuario.html">Peliculas</a></li>
+          <li><a href="./main.html">Peliculas</a></li>
           <li><a id="btn-logout" href="./index.html">Logout</a></li>
         `;
         } else {

@@ -25,9 +25,21 @@ const apiConfig = sessionStorage.getItem('apiConfig')
   ? JSON.parse(sessionStorage.getItem('apiConfig'))
   : null;
 
+// Paginación de Películas
+let pagination = 1;
+const maxPages = 10; // Máximo de páginas que mostramos (1pg=20pel)
+
 function main() {
   // Renderizamos la página
   renderPage(pageActual, isLogged);
+
+  // Lógica de usuario logueado, si no está se redirige a index,
+  // en caso contrario, cargamos la página correspondiente
+  if (userLogged && pageActual === 'main.html') {
+    showContentFilms(pagination);
+  } else if (userLogged && pageActual === 'detail.html') {
+    //showDetailFilm();
+  }
 
   //-- Nodos de DOM --
   const regForm = document.querySelector('#form-register');
@@ -103,6 +115,24 @@ function main() {
     btnLogout.addEventListener('click', () => {
       sessionStorage.clear();
       window.location = `index.html`;
+    });
+  }
+
+  // Lógica de paginación
+  if (btnNextFilms) {
+    // Aumentamos o disminuimos la página, el límite
+    // lo marca maxPages (variable global)
+    btnNextFilms.addEventListener('click', () => {
+      if (pagination < maxPages) {
+        pagination += 1;
+      }
+      showContentFilms(pagination);
+    });
+    btnPrevFilms.addEventListener('click', () => {
+      if (pagination > 1) {
+        pagination -= 1;
+      }
+      showContentFilms(pagination);
     });
   }
 
@@ -231,10 +261,73 @@ function main() {
 
       // redirigimos a la página del contenido
       setTimeout(() => {
-        window.location = `usuario.html`;
+        window.location = `main.html`;
       }, 1000);
     }
   }
+}
+
+// Muestra la lista de películas con paginación
+async function showContentFilms(pag) {
+  let url = 'https://api.themoviedb.org/3/movie/popular';
+  url += `?api_key=${userLogged.apikey}`;
+  url += `&page=${pag}`;
+  url += '&language=es-ES';
+
+  // Logica de boton next y prev
+  if (pag === 1) {
+    document.querySelector('#btn-prev').classList.add('oculto');
+  } else if (pag > 1 && pag < maxPages) {
+    document.querySelector('#btn-prev').classList.remove('oculto');
+    document.querySelector('#btn-next').classList.remove('oculto');
+  } else if (pag === maxPages) {
+    document.querySelector('#btn-next').classList.add('oculto');
+  }
+
+  /*
+  fetch()
+    .then(resp => {
+      console.log(resp);
+      if (resp.status < 200 || resp.status >= 300) {
+        console.log(resp.statusText);
+        throw new Error('HTTP Error ' + resp.status);
+      }
+      return resp.json();
+    })
+    .then(data => {
+      configApi = data.images;
+      procesarPelis()
+    })
+    .catch(error => console.log(error.message));
+*/
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (!data) {
+    return;
+  }
+
+  let html = '';
+  data.results.forEach(item => {
+    const imagePath = `${apiConfig.images.secure_base_url}w154${item.poster_path}`;
+    html += `
+    <a href="./detail.html?id=${item.id}" class="card-film">
+      <div class="cover-img">
+        <img
+            src=${imagePath}
+            alt=${item.title}
+        />
+      </div>
+      <div class="info-film">
+        <p><span>ID:</span> ${item.id}</p>
+        <p><span>Titulo:</span> ${item.title}</p>
+      </div>
+    </a>
+    `;
+  });
+
+  document.querySelector('div.films').classList.remove('nodisplay');
+  document.querySelector('div.films-container').innerHTML = html;
 }
 
 // Obtener la config del API con el API key y la guardamos
