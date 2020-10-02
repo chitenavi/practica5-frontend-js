@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/formulario.css" />
+
+    <script type="module" src="./js/app.js"></script>
+  </head>
+  <body>
+    <header></header>
+
+    <main>
+      <form
+        action="usuario.html"
+        class="formulario f-login"
+        id="form-login"
+        novalidate
+        method="POST"
+      >
+        <h2 class="form-field">Login</h2>
+
+        <div class="form-field">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="text"
+              id="i-username"
+              placeholder="Nombre de usuario"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error"></p>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <div class="field-data">
+            <input
+              class="i-single-val"
+              type="password"
+              id="i-password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="data-validation nodisplay">
+            <p class="error"></p>
+          </div>
+        </div>
+
+        <div class="form-field validate nodisplay"></div>
+
+        <div class="form-field">
+          <button type="button" class="button" id="btn-login">Entrar</button>
+        </div>
+
+        <div class="form-field">
+          <p>Olvidaste la contraseña. <a href="">Pulsa aquí</a></p>
+          <p>Aún no tienes cuenta. <a href="./registro.html">Crea una</a></p>
+        </div>
+      </form>
+    </main>
+
+    <footer></footer>
+  </body>
+</html>
