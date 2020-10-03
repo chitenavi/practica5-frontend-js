@@ -60,14 +60,27 @@ function main() {
     const inputs = regForm.querySelectorAll('input');
     const selects = regForm.querySelectorAll('select');
     const comment = regForm.querySelector('textarea');
+    const countryDefault = [
+      '-- PAIS* --',
+      '----------',
+      'España',
+      '----------',
+      'Otro',
+    ];
+    const provDefault = ['-- PROVINCIA* --', 'Madrid', 'Otra'];
 
     // Consulta lista de paises (API REST Countries)
     fetch('https://restcountries.eu/rest/v2/all?fields=nativeName')
       .then(response => response.json())
       .then(data => {
-        const dataArr = data.map(ele => ele.nativeName);
-        dataArr.unshift('-- PAIS* --', '----------', 'España', '----------');
-        setSelect('s-nation', dataArr);
+        const countryArr = data.map(ele => ele.nativeName);
+        countryArr.unshift('-- PAIS* --', '----------', 'España', '----------');
+        setSelect('s-nation', countryArr);
+      })
+      .catch(err => {
+        // Si hay error en la consulta cargamos la opcion por defecto
+        console.log(err);
+        setSelect('s-nation', countryDefault);
       });
 
     // Consulta lista de provincias
@@ -79,6 +92,11 @@ function main() {
         const dataArr = data.map(ele => ele.nm);
         dataArr.unshift('-- PROVINCIA* --');
         setSelect('s-prov', dataArr);
+      })
+      .catch(err => {
+        // Si hay error en la consulta cargamos la opcion por defecto
+        console.log(err);
+        setSelect('s-prov', provDefault);
       });
 
     inputs.forEach(item => {
@@ -112,6 +130,7 @@ function main() {
       item.addEventListener('blur', formElementManager);
     });
 
+    // Submit form
     logForm.querySelector('#btn-login').addEventListener('click', onClickLogin);
   }
 
