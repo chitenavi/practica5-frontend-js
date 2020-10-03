@@ -15,7 +15,7 @@
   </a>
 </p>
 
-> Práctica del módulo desarrollo Frontend con JavaScript, del Bootcamp IX de KeepCoding. Aplicación web centrada en la información de películas, donde el usuario puede registrarse, hacer login y consultar las películas más populares actuales, así como obtener información más detallada de cada una
+> Práctica del módulo desarrollo Frontend con JavaScript, del Bootcamp IX de KeepCoding. Aplicación web centrada en la información de películas, donde el usuario puede registrarse, hacer login y consultar las películas más populares actuales, así como obtener información más detallada de cada una. Todo con conceptos que se han desarrollado durante las clases del módulo.
 
 ### 🏠 [Homepage](http://127.0.0.1:8080/)
 
@@ -27,16 +27,18 @@
 npm i -g live-server
 ```
 
-> Tambien tienes la opción de probar en tu propio servidor local.
+> También tienes la opción de probar en tu propio servidor local.
 > Una vez puesta en marcha la aplicación web, necesitas hacerte con una API key, que suministra el portal <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>, para el proceso de registro de una cuenta. Esta API key, única por usuario, se usará para obtener información en la aplicación
 
 ## Instalación
+
+> Recomendable, una vez descargado el repo, instalar dependencias. Para este proyecto no existen dependencias, sólo de desarrollo.
 
 ```sh
 npm install
 ```
 
-## Usage
+## Uso
 
 > Si tienes live-server instalado, ejecuta desde la raíz del proyecto:
 
