@@ -76,6 +76,7 @@ export function validateForm(form) {
   const region = form.querySelector('select#s-prov');
   const country = form.querySelector('select#s-nation');
 
+  // Validamos todos los campos del form
   if (!form.checkValidity()) {
     elementsToValidate.forEach(item => {
       if (!item.disabled) inlineValidity(item);
@@ -84,7 +85,8 @@ export function validateForm(form) {
     errorObj.hayError = true;
   }
 
-  if (country) {
+  // Revisamos el país y su provincia si es España
+  if (country && !errorObj.hayError) {
     if (
       country.value === '-- PAIS* --' ||
       (country.value === '----------' && !errorObj.hayError)
@@ -103,7 +105,8 @@ export function validateForm(form) {
     }
   }
 
-  if (passOne && passTwo) {
+  // Checkeamos los campos de password
+  if (passOne && passTwo && !errorObj.hayError) {
     if (passOne.value !== passTwo.value && !errorObj.hayError) {
       passOne.classList.add('border-error');
       passTwo.classList.add('border-error');
@@ -115,8 +118,11 @@ export function validateForm(form) {
     }
   }
 
+  // Mostramos los errores si los hay
   if (errorObj.hayError) {
     displayMessageForm(messValForm, errorObj.code, errorObj.message);
   }
+
+  // Retornamos si ha habido error o no
   return errorObj.hayError;
 }

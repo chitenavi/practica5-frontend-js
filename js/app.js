@@ -27,7 +27,7 @@ const apiConfig = sessionStorage.getItem('apiConfig')
 
 // Paginación de Películas
 let pagination = 1;
-const maxPages = 10; // Máximo de páginas que mostramos (1pg=20pel)
+const maxPages = 10; // Máximo de páginas que mostramos (1pag = 20pel)
 
 function main() {
   // Renderizamos la página
@@ -40,6 +40,11 @@ function main() {
     showContentFilms(pagination);
   } else if (isLogged && pageActual === 'detail.html') {
     showDetailFilm();
+  } else if (
+    !isLogged &&
+    (pageActual === 'main.html' || pageActual === 'detail.html')
+  ) {
+    window.location = `index.html`;
   }
 
   //-- Nodos de DOM --
@@ -168,7 +173,7 @@ function main() {
   }
 
   // Enviar formulario de Registro
-  function onClickRegister(ev) {
+  async function onClickRegister(ev) {
     ev.preventDefault();
     const dataUser = {};
 
@@ -176,6 +181,17 @@ function main() {
 
     // Validamos el formulario de registro
     if (validateForm(regForm)) return;
+
+    // Evaluamos que sea un API key válido
+    dataUser.apikey = regForm.querySelector('input#i-apikey').value;
+    if (!(await checkValidAPIkey(dataUser.apikey))) {
+      displayMessageForm(
+        messValForm,
+        'error',
+        'El API key no es válido!, por favor revísalo'
+      );
+      return;
+    }
 
     // Si valida recogemos datos y formamos los datos de usuario
     dataUser.gendre = [...regForm.querySelectorAll('[name="genero"]')].filter(
@@ -199,8 +215,6 @@ function main() {
     dataUser.email = regForm.querySelector('input#i-email').value;
 
     dataUser.password = regForm.querySelector('input#i-password').value;
-
-    dataUser.apikey = regForm.querySelector('input#i-apikey').value;
 
     dataUser.comment = regForm.querySelector('textarea').value;
 
@@ -251,14 +265,16 @@ function main() {
     } else if (findUser.password !== password.value) {
       displayMessageForm(messValForm, 'error', 'Password incorrecto!');
     } else {
+      // Guardamos la configuracion del api en sessionStorage
+      if (!getAPIConfig(findUser.apikey)) {
+        displayMessageForm(messValForm, 'error', 'Error de conexion a la API');
+        return;
+      }
+
       // Mostramos login correcto y guardamos el usuario en
       // sessionStorage, lo usamos mientras esté logueado
-
       displayMessageForm(messValForm, 'success', 'Login correcto!');
       sessionStorage.setItem('userLogged', JSON.stringify(findUser));
-
-      // Guardamos la configuracion del api en sessionStorage
-      getAPIConfig(findUser.apikey);
 
       // redirigimos a la página del contenido
       setTimeout(() => {
@@ -270,114 +286,162 @@ function main() {
 
 // Muestra la lista de películas con paginación
 async function showContentFilms(pag) {
-  let url = 'https://api.themoviedb.org/3/movie/popular';
-  url += `?api_key=${userLogged.apikey}`;
-  url += `&page=${pag}`;
-  url += '&language=es-ES';
+  try {
+    let url = 'https://api.themoviedb.org/3/movie/popular';
+    url += `?api_key=${userLogged.apikey}`;
+    url += `&page=${pag}`;
+    url += '&language=es-ES';
 
-  // Logica de boton next y prev
-  if (pag === 1) {
-    document.querySelector('#btn-prev').classList.add('oculto');
-  } else if (pag > 1 && pag < maxPages) {
-    document.querySelector('#btn-prev').classList.remove('oculto');
-    document.querySelector('#btn-next').classList.remove('oculto');
-  } else if (pag === maxPages) {
-    document.querySelector('#btn-next').classList.add('oculto');
+    // Logica de boton next y prev
+    if (pag === 1) {
+      document.querySelector('#btn-prev').classList.add('oculto');
+    } else if (pag > 1 && pag < maxPages) {
+      document.querySelector('#btn-prev').classList.remove('oculto');
+      document.querySelector('#btn-next').classList.remove('oculto');
+    } else if (pag === maxPages) {
+      document.querySelector('#btn-next').classList.add('oculto');
+    }
+
+    // Hacemos la consulta
+    const response = await fetch(url);
+
+    // Obtenemos los datos de respuesta
+    const data = await response.json();
+
+    // Comprobamos si hubo error, para tal caso generamos el mensaje
+    if (response.status < 200 || response.status >= 300) {
+      // console.log(data);
+      throw new Error(`ERROR ${response.status}! ${data.status_message}`);
+    }
+
+    // Generamos el html de las películas obtenidas
+    let html = '';
+    data.results.forEach(item => {
+      const imagePath = `${apiConfig.images.secure_base_url}w154${item.poster_path}`;
+      html += `
+      <a href="./detail.html?id=${item.id}" class="card-film">
+        <div class="cover-img">
+          <img
+              src=${imagePath}
+              alt=${item.title}
+          />
+        </div>
+        <div class="info-film">
+          <p><span>ID:</span> ${item.id}</p>
+          <p><span>Titulo:</span> ${item.title}</p>
+        </div>
+      </a>
+      `;
+    });
+
+    // Mostarmos contenido
+    document.querySelector('div.films-container').innerHTML = html;
+    document.querySelector('div.films').classList.remove('nodisplay');
+  } catch (err) {
+    // Mostramos el error
+    // console.dir(err);
+    document.querySelector('div.err-msg').innerHTML = `<h2>${err.message}</h2>`;
+    document.querySelector('div.err-msg').classList.remove('nodisplay');
   }
-
-  /*
-  fetch()
-    .then(resp => {
-      console.log(resp);
-      if (resp.status < 200 || resp.status >= 300) {
-        console.log(resp.statusText);
-        throw new Error('HTTP Error ' + resp.status);
-      }
-      return resp.json();
-    })
-    .then(data => {
-      configApi = data.images;
-      procesarPelis()
-    })
-    .catch(error => console.log(error.message));
-*/
-  const response = await fetch(url);
-  const data = await response.json();
-
-  if (!data) {
-    return;
-  }
-
-  let html = '';
-  data.results.forEach(item => {
-    const imagePath = `${apiConfig.images.secure_base_url}w154${item.poster_path}`;
-    html += `
-    <a href="./detail.html?id=${item.id}" class="card-film">
-      <div class="cover-img">
-        <img
-            src=${imagePath}
-            alt=${item.title}
-        />
-      </div>
-      <div class="info-film">
-        <p><span>ID:</span> ${item.id}</p>
-        <p><span>Titulo:</span> ${item.title}</p>
-      </div>
-    </a>
-    `;
-  });
-
-  document.querySelector('div.films').classList.remove('nodisplay');
-  document.querySelector('div.films-container').innerHTML = html;
 }
 
 // Muestra los detalles de una película en una página independiente
 async function showDetailFilm() {
-  // Obtenemos los parametros de la query string
-  const params = new URLSearchParams(window.location.search);
+  try {
+    // Obtenemos los parametros de la query string,
+    // en la query debe venir siempre el id de la
+    // pelicula, porque en el contenido ya lo generamos
+    const params = new URLSearchParams(window.location.search);
 
-  let url = 'https://api.themoviedb.org/3/movie';
-  url += `/${params.get('id')}`;
-  url += `?api_key=${userLogged.apikey}`;
-  url += `&language=es-ES`;
+    let url = 'https://api.themoviedb.org/3/movie';
+    url += `/${params.get('id')}`;
+    url += `?api_key=${userLogged.apikey}`;
+    url += `&language=es-ES`;
 
-  const response = await fetch(url);
-  const dataFilm = await response.json();
+    // Hacemos consulta de info detallada
+    const response = await fetch(url);
 
-  console.log(dataFilm);
+    // Obtenemos los datos de respuesta
+    const dataFilm = await response.json();
 
-  const html = `
-  <h2>${dataFilm.title}</h2>
-  <div>
-  <img src="${apiConfig.images.secure_base_url}w780${dataFilm.backdrop_path}" alt="" />
-  </div>
+    // Comprobamos si hubo error, para tal caso generamos el mensaje
+    if (response.status < 200 || response.status >= 300) {
+      // console.log(data);
+      throw new Error(`ERROR ${response.status}! ${dataFilm.status_message}`);
+    }
+
+    //console.log(dataFilm);
+
+    const html = `
+        <h2>${dataFilm.title}</h2>
+        <div>
+          <img src="${apiConfig.images.secure_base_url}w780${dataFilm.backdrop_path}" alt="" />
+        </div>
   
-  <div class="film-info">
-    <h3>Genero</h3>
-    <p>${dataFilm.genres[0].name}</p>
-    <h3>Sinopsis</h3>
-    <p>
-      ${dataFilm.overview}
-    </p>
-    <p>
-      <span>Fecha de lanzamiento:</span> ${dataFilm.release_date}
-      <span>Puntuación media:</span> ${dataFilm.vote_average}
-    </p>
-  </div>
-  `;
-  document.querySelector('div.detail-container').innerHTML = html;
-  document.querySelector('div.detail-container').classList.remove('nodisplay');
+        <div class="film-info">
+          <h3>Genero</h3>
+          <p>${dataFilm.genres[0].name}</p>
+          <h3>Sinopsis</h3>
+          <p>
+            ${dataFilm.overview}
+          </p>
+          <p>
+            <span>Fecha de lanzamiento:</span> ${dataFilm.release_date}
+            <span>Puntuación media:</span> ${dataFilm.vote_average}
+          </p>
+        </div>
+      `;
+    document.querySelector('div.detail-container').innerHTML = html;
+    document
+      .querySelector('div.detail-container')
+      .classList.remove('nodisplay');
+  } catch (err) {
+    // Mostramos el error
+    // console.dir(err);
+    document.querySelector('div.err-msg').innerHTML = `<h2>${err.message}</h2>`;
+    document.querySelector('div.err-msg').classList.remove('nodisplay');
+  }
 }
 
-// Obtener la config del API con el API key y la guardamos
-// como variable de sesion
+// Obtener la config del API (rutas imagen, tamaños, etc.)
+// con el API key y la guardamos como variable de sesion
 async function getAPIConfig(apikey) {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/configuration?api_key=${apikey}`
-  );
-  const configApi = await response.json();
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/configuration?api_key=${apikey}`
+    );
+    const configApi = await response.json();
+    if (response.status < 200 || response.status >= 300) {
+      // console.log(data);
+      throw new Error(`ERROR ${response.status}! ${configApi.status_message}`);
+    }
 
-  sessionStorage.setItem('apiConfig', JSON.stringify(configApi));
+    sessionStorage.setItem('apiConfig', JSON.stringify(configApi));
+    return true;
+  } catch (err) {
+    console.log(err.message);
+    return false;
+  }
 }
 
+// Check de API key válido
+async function checkValidAPIkey(apikey) {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}`
+    );
+    const configApi = await response.json();
+
+    // Si la API Key no es válida, responde 401
+    if (response.status === 401) {
+      throw new Error(configApi.status_message);
+    }
+    return true;
+  } catch (err) {
+    console.log(err.message);
+    return false;
+  }
+}
+
+// Con todo el documento cargado, lanzamos main
 document.addEventListener('DOMContentLoaded', main);

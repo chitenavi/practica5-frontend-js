@@ -4,12 +4,16 @@
   justify-content: center;
   flex-wrap: wrap;
 
-  background-color: var(--surface2-color);
+  background-color: rgba(242, 242, 242, 0.8);
   padding: 1rem 2rem;
   box-shadow: var(--box-shadow);
   border-radius: 1rem;
   max-width: 800px;
   min-width: 400px;
+}
+.form-field a {
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 .form-field {

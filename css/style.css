@@ -5,9 +5,10 @@
   --surface3-color: #ffffff;
   --element1-color: #111111;
   --element2-color: #222222;
-  --element3-color: #333333;
+  --element3-color: #34252f;
   --primary-color: #01408e;
-  --secondary-color: #3c5d5c;
+  /*--secondary-color: #3c5d5c;*/
+  --secondary-color: #39361b;
   --tertiary-color: #fff7d6;
   --footer-bg-color: #000;
   --error-color: rgb(163, 0, 33);
@@ -27,15 +28,15 @@ html {
   font-family: var(--sans);
   font-size: 1rem;
   overflow-x: hidden;
-  background-image: url('../img/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url('../img/bg.jpg');
+  background-size: cover;
+  background-position: center;
 
   min-height: 100vh;
 }
@@ -56,7 +57,8 @@ h1 {
   line-height: 1.1;
   text-align: center;
   text-transform: uppercase;
-  color: var(--element2-color);
+  color: #faf7ea;
+  text-shadow: 3px 3px 3px black;
 }
 
 h2 {
@@ -99,11 +101,55 @@ a:hover {
 /* Header, Navbar */
 .menu {
   box-shadow: var(--box-shadow);
-  background-color: var(--surface2-color);
+
   height: var(--menu-height);
   display: flex;
   justify-content: flex-start;
   font-size: 1.3rem;
+
+  background: -moz-linear-gradient(
+    left,
+    rgba(169, 168, 138, 1) 0%,
+    rgba(75, 74, 41, 1) 36%,
+    rgba(75, 74, 41, 1) 67%,
+    rgba(169, 168, 138, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(169, 168, 138, 1)),
+    color-stop(36%, rgba(75, 74, 41, 1)),
+    color-stop(67%, rgba(75, 74, 41, 1)),
+    color-stop(100%, rgba(169, 168, 138, 1))
+  );
+  background: -webkit-linear-gradient(
+    left,
+    rgba(169, 168, 138, 1) 0%,
+    rgba(75, 74, 41, 1) 36%,
+    rgba(75, 74, 41, 1) 67%,
+    rgba(169, 168, 138, 1) 100%
+  );
+  background: -o-linear-gradient(
+    left,
+    rgba(169, 168, 138, 1) 0%,
+    rgba(75, 74, 41, 1) 36%,
+    rgba(75, 74, 41, 1) 67%,
+    rgba(169, 168, 138, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    left,
+    rgba(169, 168, 138, 1) 0%,
+    rgba(75, 74, 41, 1) 36%,
+    rgba(75, 74, 41, 1) 67%,
+    rgba(169, 168, 138, 1) 100%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(169, 168, 138, 1) 0%,
+    rgba(75, 74, 41, 1) 36%,
+    rgba(75, 74, 41, 1) 67%,
+    rgba(169, 168, 138, 1) 100%
+  );
 }
 
 .menu ul {
@@ -125,6 +171,25 @@ a:hover {
   color: var(--tertiary-color);
 }
 
+/* Página inicio */
+.intro {
+  background-color: rgba(255, 247, 214, 0.6);
+  padding: 1rem 2rem;
+  box-shadow: var(--box-shadow);
+  max-width: 600px;
+  border-radius: 1rem;
+}
+.intro h2 {
+  font-style: italic;
+}
+.intro p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+.intro a {
+  color: var(--primary-color);
+  font-weight: bold;
+}
 /* Página contenido pelis */
 .films-container {
   display: grid;
@@ -187,10 +252,10 @@ a:hover {
 
 /* Footer */
 footer {
-  background-color: var(--footer-bg-color);
   color: #ddd;
   text-align: center;
   padding: 1rem 0;
   margin-top: 2rem;
   width: 100vw;
+  background-color: black;
 }
