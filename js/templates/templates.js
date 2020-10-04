@@ -1,3 +1,4 @@
+// Título de la página
 export const templTitle = {
   render: title => {
     let titulo;
@@ -19,6 +20,7 @@ export const templTitle = {
   },
 };
 
+// Header, cambia en función del usuario logueado
 export const templHeader = {
   render: (title, logged = false) => {
     let menu;
@@ -78,6 +80,7 @@ export const templHeader = {
   },
 };
 
+// Footer
 export const templFooter = {
   render: () => {
     const year = new Date().getFullYear();

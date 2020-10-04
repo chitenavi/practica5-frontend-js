@@ -1,4 +1,9 @@
-import { renderPage, setSelect } from './utils/tools.js';
+import {
+  renderPage,
+  setSelect,
+  getAPIConfig,
+  checkValidAPIkey,
+} from './utils/tools.js';
 
 import {
   validateForm,
@@ -20,20 +25,21 @@ const userLogged = sessionStorage.getItem('userLogged')
   : null;
 const isLogged = !!userLogged;
 
-// Configuracion del API
+// Configuracion del API (rutas, tamaños, etc.)
 const apiConfig = sessionStorage.getItem('apiConfig')
   ? JSON.parse(sessionStorage.getItem('apiConfig'))
   : null;
 
-// Paginación de Películas
+// Paginación de Películas, por defecto mostramos la 1
 let pagination = 1;
 const maxPages = 10; // Máximo de páginas que mostramos (1pag = 20pel)
 
+//--- FUNCIÓN PRINCIPAL DE LA APP ---//
 function main() {
   // Renderizamos la página
   renderPage(pageActual, isLogged);
 
-  // Lógica de usuario logueado, si no está se no permitimos
+  // Lógica de usuario logueado, si no está no permitimos
   // entrar al contenido y redirigimos a index. Si está,
   // cargamos el contenido según la página
   if (isLogged && pageActual === 'main.html') {
@@ -250,7 +256,7 @@ function main() {
 
     dataUser.comment = regForm.querySelector('textarea').value;
 
-    console.log(dataUser);
+    // console.log(dataUser);
 
     // Obtenemos los datos del LocalStorage
     const usersArray = window.localStorage.getItem(storeUsers)
@@ -432,46 +438,6 @@ async function showDetailFilm() {
     // console.dir(err);
     document.querySelector('div.err-msg').innerHTML = `<h2>${err.message}</h2>`;
     document.querySelector('div.err-msg').classList.remove('nodisplay');
-  }
-}
-
-// Obtener la config del API (rutas imagen, tamaños, etc.)
-// con el API key y la guardamos como variable de sesion
-async function getAPIConfig(apikey) {
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/configuration?api_key=${apikey}`
-    );
-    const configApi = await response.json();
-    if (response.status < 200 || response.status >= 300) {
-      // console.log(data);
-      throw new Error(`ERROR ${response.status}! ${configApi.status_message}`);
-    }
-
-    sessionStorage.setItem('apiConfig', JSON.stringify(configApi));
-    return true;
-  } catch (err) {
-    console.log(err.message);
-    return false;
-  }
-}
-
-// Check de API key válido
-async function checkValidAPIkey(apikey) {
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}`
-    );
-    const configApi = await response.json();
-
-    // Si la API Key no es válida, responde 401
-    if (response.status === 401) {
-      throw new Error(configApi.status_message);
-    }
-    return true;
-  } catch (err) {
-    console.log(err.message);
-    return false;
   }
 }
 
