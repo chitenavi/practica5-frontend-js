@@ -28,11 +28,11 @@ npm i -g live-server
 ```
 
 > También tienes la opción de probar en tu propio servidor local.
-> Una vez puesta en marcha la aplicación web, necesitas hacerte con una API key, que suministra el portal <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>, para el proceso de registro de una cuenta. Esta API key, única por usuario, se usará para obtener información en la aplicación
+> Una vez puesta en marcha la aplicación web, necesitas hacerte con una API key, que suministra el portal <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>, para el proceso de registro de una cuenta. Esta API key, única por usuario, se usará para obtener información en la aplicación.
 
 ## Instalación
 
-> Recomendable, una vez descargado el repo, instalar dependencias. Para este proyecto no existen dependencias, sólo de desarrollo.
+> Recomendable, una vez descargado el repo, instalar dependencias. Para este proyecto no existen dependencias directas, sólo de desarrollo.
 
 ```sh
 npm install
