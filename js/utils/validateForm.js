@@ -1,5 +1,5 @@
 // Funcion que muestra mensaje en formulario
-// dependiendo del tipo, error o exito
+// dependiendo del tipo, error o éxito
 export function displayMessageForm(element, type, message) {
   element.innerHTML = `<p>${message}</p>`;
   if (type === 'error') {
@@ -58,7 +58,7 @@ export function inlineValidity(element) {
   }
 }
 
-// Funcion de validacion de formulario completo
+// Funcion de validación de formulario completo
 export function validateForm(form) {
   const messValForm = form.querySelector('.form-field.validate');
   const errorObj = {

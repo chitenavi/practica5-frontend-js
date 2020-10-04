@@ -60,6 +60,8 @@ function main() {
     const inputs = regForm.querySelectorAll('input');
     const selects = regForm.querySelectorAll('select');
     const comment = regForm.querySelector('textarea');
+    const btnOpenModalCond = document.querySelector('#btn-open-cond');
+    const btnCloseModalCond = document.querySelector('#btn-close-cond');
     const countryDefault = [
       '-- PAIS* --',
       '----------',
@@ -78,7 +80,8 @@ function main() {
         setSelect('s-nation', countryArr);
       })
       .catch(err => {
-        // Si hay error en la consulta cargamos la opcion por defecto
+        // Si hay error en la consulta cargamos la opcion por defecto,
+        // no depender de un API de terceros para registrar
         console.log(err);
         setSelect('s-nation', countryDefault);
       });
@@ -98,6 +101,16 @@ function main() {
         console.log(err);
         setSelect('s-prov', provDefault);
       });
+
+    // Modal condiciones, mostrar y ocultar
+    btnCloseModalCond.addEventListener('click', () => {
+      //console.log(ev);
+      document.querySelector('#modal1').classList.remove('is-visible');
+    });
+    btnOpenModalCond.addEventListener('click', () => {
+      //console.log(ev);
+      document.querySelector('#modal1').classList.add('is-visible');
+    });
 
     inputs.forEach(item => {
       item.addEventListener('focus', formElementManager);
