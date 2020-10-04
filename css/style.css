@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,700&display=swap');
 :root {
   /* Colors */
   --surface1-color: #e6e6e6;
@@ -7,18 +8,19 @@
   --element2-color: #222222;
   --element3-color: #34252f;
   --primary-color: #01408e;
-  /*--secondary-color: #3c5d5c;*/
   --secondary-color: #39361b;
   --tertiary-color: #fff7d6;
   --footer-bg-color: #000;
   --error-color: rgb(163, 0, 33);
+  --error-bg: rgb(238, 148, 166);
+  --success-color: mediumspringgreen;
 
   /* Shadows */
-  --box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.35);
+  --box-shadow: 0 1px 9px 1px rgba(0, 0, 0, 0.4);
 
   /* Fonts */
-  --sans: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu,
-    cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --sans: 'Open Sans', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto,
+    oxygen, ubuntu, cantarell, 'Helvetica Neue', sans-serif;
 
   --max-width: 1200px;
   --menu-height: 80px;
@@ -37,6 +39,7 @@ body {
   background-image: url('../img/bg.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
   min-height: 100vh;
 }

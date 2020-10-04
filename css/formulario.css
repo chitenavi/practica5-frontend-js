@@ -1,4 +1,5 @@
-/* Formularios */
+/* Formularios
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .formulario {
   display: flex;
   justify-content: center;
@@ -47,7 +48,6 @@ textarea,
 select {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  /* border: 1px solid lightgray; */
   background-color: var(--surface1-color);
   color: var(--element3-color);
   width: 100%;
@@ -65,10 +65,10 @@ select {
   border: 2px solid var(--secondary-color);
 }
 .border-error {
-  border: 1px solid darkred;
+  border: 1px solid var(--error-color);
 }
 .border-success {
-  border: 1px solid mediumspringgreen;
+  border: 1px solid var(--success-color);
 }
 .form-field.validate {
   padding: 0.2rem 0;
@@ -77,16 +77,71 @@ select {
 
 .validate.error-div {
   border: 1px solid var(--error-color);
-  background-color: rgb(238, 148, 166);
+  background-color: var(--error-bg);
   color: var(--error-color);
 }
 .validate.success-div {
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
-  background-color: mediumspringgreen;
+  background-color: var(--success-color);
 }
 
 /* Formulario Login*/
 .f-login {
   max-width: 400px;
+}
+
+/* Modal condiciones
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-dialog {
+  position: relative;
+  max-width: 800px;
+  max-height: 80vh;
+  border-radius: 0.5rem;
+  background: var(--surface2-color);
+  overflow: auto;
+}
+
+.modal-dialog > * {
+  padding: 1rem;
+}
+
+.modal-header {
+  background: var(--tertiary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-header h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.modal-header .close-modal {
+  font-size: 1.5rem;
+}
+
+.modal p + p {
+  margin-top: 1rem;
 }

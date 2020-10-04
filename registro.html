@@ -62,7 +62,7 @@
             <label for="">(*)</label>
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -96,7 +96,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -110,7 +110,7 @@
             ></select>
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -125,7 +125,7 @@
             ></select>
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -142,7 +142,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -159,7 +159,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -174,7 +174,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -191,7 +191,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -206,7 +206,7 @@
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -218,12 +218,12 @@
               id="i-apikey"
               placeholder="API-key*"
               minlength="10"
-              maxlength="40"
+              maxlength="50"
               required
             />
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -245,10 +245,11 @@
               id="i-condition"
               required
             />
-            <label for="i-condition">Acepto las condiciones de uso</label>
+            <label for="i-condition">Acepto las condiciones de uso. </label>
+            <a id="btn-open-cond">Revísalas</a>
           </div>
           <div class="data-validation nodisplay">
-            <p class="error">Error validacion</p>
+            <p class="error"></p>
           </div>
         </div>
 
@@ -261,9 +262,60 @@
         </div>
 
         <div class="form-field">
-          <p>Ya tienes cuenta? <a href="./login.html">Haz login</a></p>
+          <p class="field-data">
+            Ya tienes cuenta? <a href="./login.html">Haz login</a>
+          </p>
         </div>
       </form>
+
+      <div class="modal" id="modal1">
+        <div class="modal-dialog">
+          <header class="modal-header">
+            <h3>Condiciones de uso</h3>
+
+            <a class="close-modal" id="btn-close-cond"> ✕ </a>
+          </header>
+          <section class="modal-content">
+            <p>
+              <strong>Presiona ✕ para cerrarlo</strong>
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+              repellendus reprehenderit accusamus totam ratione! Nesciunt, nemo
+              dolorum recusandae ad ex nam similique dolorem ab perspiciatis
+              qui. Facere, dignissimos. Nemo, ea.
+            </p>
+            <p>
+              Nor again is there anyone who loves or pursues or desires to
+              obtain pain of itself, because it is pain, but because
+              occasionally circumstances occur in which toil and pain can
+              procure him some great pleasure. To take a trivial example, which
+              of us ever undertakes laborious physical exercise, except to
+              obtain some advantage from it? But who has any right to find fault
+              with a man who chooses to enjoy a pleasure that has no annoying
+              consequences, or one who avoids a pain that produces no resultant
+              pleasure
+            </p>
+            <p>
+              Nullam vitae enim vel diam elementum tincidunt a eget metus.
+              Curabitur finibus vestibulum rutrum. Vestibulum semper tellus
+              vitae tortor condimentum porta. Sed id ex arcu. Vestibulum
+              eleifend tortor non purus porta dapibus
+            </p>
+            <p>
+              Nor again is there anyone who loves or pursues or desires to
+              obtain pain of itself, because it is pain, but because
+              occasionally circumstances occur in which toil and pain can
+              procure him some great pleasure. To take a trivial example, which
+              of us ever undertakes laborious physical exercise, except to
+              obtain some advantage from it? But who has any right to find fault
+              with a man who chooses to enjoy a pleasure that has no annoying
+              consequences, or one who avoids a pain that produces no resultant
+              pleasure
+            </p>
+          </section>
+        </div>
+      </div>
     </main>
 
     <footer></footer>
