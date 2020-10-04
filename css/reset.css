@@ -1,0 +1,56 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid;
+}
+
+textarea,
+input,
+button,
+label,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
+}
+
+textarea:focus,
+input:focus,
+select:focus,
+button:focus {
+  outline: none;
+}
+
+img,
+video {
+  max-width: 100%;
+}
