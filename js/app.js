@@ -228,6 +228,10 @@ function main() {
         'error',
         'El API key no es válido!, por favor revísalo'
       );
+      regForm.querySelector('input#i-apikey').classList.add('border-error');
+      regForm
+        .querySelector('input#i-apikey')
+        .classList.remove('border-success');
       return;
     }
 
