@@ -63,9 +63,11 @@ select {
 }
 .border-focus {
   border: 2px solid var(--secondary-color);
+  box-shadow: 0px 0px 4px 0px var(--secondary-color);
 }
 .border-error {
   border: 1px solid var(--error-color);
+  box-shadow: 0px 0px 8px 0px var(--error-bg);
 }
 .border-success {
   border: 1px solid var(--success-color);

@@ -55,6 +55,13 @@ export function inlineValidity(element) {
   } else {
     error.classList.add('nodisplay');
     element.classList.add('border-success');
+
+    if (element.type === 'radio') {
+      const aGenero = [...document.querySelectorAll('[name="genero"]')];
+      aGenero.forEach(item => item.classList.remove('border-error'));
+    } else {
+      element.classList.remove('border-error');
+    }
   }
 }
 
