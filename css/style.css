@@ -193,8 +193,13 @@ a:hover {
 /* Página contenido pelis */
 .films-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+}
+@media (min-width: 768px) {
+  .films-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 
 .films-container .card-film {
